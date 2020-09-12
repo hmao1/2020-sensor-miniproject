@@ -5,11 +5,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-
+time_list=[]
 tem_list=[]
 occu_list=[]
+co2_list=[]
 room_list=[]
+office_temp=[]
+office_occu=[]
+
+
 with open('sensor.txt','r') as file:
 	for line in file:
 		#check the non-empty line
@@ -20,7 +24,11 @@ with open('sensor.txt','r') as file:
 
 			tem_list.append((res[head_str]['temperature'])[0])
 			occu_list.append((res[head_str]['occupancy'])[0])
+			co2_list.append((res[head_str]['co2'])[0])
+			time_list.append((res[head_str]['time']))
 			room_list.append(head_str)
+
+			
 
 
 
@@ -51,18 +59,50 @@ print(uniq_percent)
 
 
 
-#plot the probability distribution
-x=np.arange(len(uniq_room))
-plt.bar(x,uniq_percent)
-plt.xticks(x,uniq_room)
-plt.xlabel('sensor in rooms')
+
+#plot probability density for sensor type
+#temperature
+fig=plt.figure()
+
+
+plt.subplot(2,2,1)
+plt.title('probability distribution function')
+
+s1=pd.Series(tem_list)
+ax1=s1.plot.kde()
+plt.xlabel('temperature')
 plt.ylabel('probability')
-plt.title('sensor type probability distribution')
+
+
+
+
+#occupancy
+plt.subplot(2,2,2)
+s2=pd.Series(occu_list)
+ax2=s2.plot.kde()
+plt.xlabel('occupancy')
+plt.ylabel('probability')
+
+
+
+#co2
+plt.subplot(2,2,3)
+s3=pd.Series(co2_list)
+ax3=s3.plot.kde()
+plt.xlabel('co2')
+plt.ylabel('probability')
+
+
+
 plt.show()
 
 
 
+
+
 #logic to capture the abnormal temperature point
+std1=statistics.pstdev(tem_list)
+print("The first standard deviation temperature "+str(std1))
 
 
 
