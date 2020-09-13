@@ -66,19 +66,6 @@ if __name__ == "__main__":
     print("the variance of lab1 occupancy is: "+str(np.var(data['occupancy']['lab1'])))
     
 
-    # #plot the data (given) 
-    # for k in data:
-    #     data[k].plot()
-    #     time = data[k].index
-    #     data[k].hist()
-    #     plt.figure()
-    #     plt.hist(np.diff(time.values).astype(np.int64) // 1000000000)
-    #     plt.xlabel("Time (seconds)")
-
-    # plt.show()
-
-    
-    #access the index(time) for time interval
     
     for k in data:
         time0=data[k].index
@@ -171,12 +158,6 @@ if __name__ == "__main__":
         if str(i)!='nan':
             lab1_tem_count+=1
 
-
-
-    #calculate the temperature median and variance regarding the abnormal data
-    # for i in lab1_tem:
-    #     if i==clean_ab_tem1[0]:
-    #         print("exist!!")
 
     normal_tem1=[x for x in lab1_tem if (x not in clean_ab_tem1 and str(x)!='nan' )]
     
