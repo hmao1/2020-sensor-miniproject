@@ -81,6 +81,7 @@ variance of occupancy in lab1 is: 4.0798
 
 After calulating these statistics, we plotted probability density functions for each data type:
 
+
 ![](images/PDFs-miniproject.png)
 
 Here is the mean and variance of the time intravals:
